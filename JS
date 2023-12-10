@@ -1,0 +1,53 @@
+// script.js
+const questions = [
+  { question: "Dans quelle ville balnéaire britannique se déroule la sitcom de la BBC 'Fawlty Towers' ?", answer: "Torquay" },
+  { question: "Quel est le premier album de Radiohead ?", answer: "Pablo Honey" },
+  { question: "Que doit on faire quand on commence un cours de web avec Mr Dupont ?", answer: "Inspecter" },
+  { question: "Quel est l'ingrédient principale du Houmous ?", answer: "Poichiche" },
+   { question: "Quel est le nom de la plus grande planete du système solaire ?", answer: "Jupiter" },
+   { question: "Quel est le nom de la série avec un personnage utilisant une cabien téléphonique ?", answer: "DR WHO" },
+   { question: "Quel à été la console la plus vendu au monde ?", answer: "La PLaystation 2" },
+   { question: "Quel est le plus long fleuve d'Europe occidentale ?", answer: "Rhin" },
+   { question: "Quel peuple a inventé la poudre a canon ?", answer: "Les chinois" },
+   { question: " Qui est l'heroïne de Notre-Dame de Paris ?", answer: "Esmeralda" },
+  
+  // Ajoutez d'autres questions ici
+];
+
+function displayQuestions() {
+  const questionContainer = document.getElementById('question-container');
+  questionContainer.innerHTML = ''; // Nettoyer le conteneur de question
+
+  // Générer un ensemble aléatoire de 4 questions uniques
+  let displayedQuestions = [];
+  while(displayedQuestions.length < 4){
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    const q = questions[randomIndex];
+    if(!displayedQuestions.includes(q)){
+      displayedQuestions.push(q);
+    }
+  }
+
+  displayedQuestions.forEach(function(q) {
+    // Créer et ajouter la question
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+    questionDiv.textContent = q.question;
+    questionContainer.appendChild(questionDiv);
+
+    // Créer et ajouter la réponse
+    const answerDiv = document.createElement('div');
+    answerDiv.classList.add('answer');
+    answerDiv.textContent = q.answer;
+    questionContainer.appendChild(answerDiv);
+
+    // Afficher la réponse au clic sur la question
+    questionDiv.onclick = function() {
+      answerDiv.style.display = 'block';
+    };
+  });
+}
+
+document.getElementById('next-button').addEventListener('click', displayQuestions);
+
+window.onload = displayQuestions;
